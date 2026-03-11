@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hotel Operations KPI Dashboard | Samuel Then</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏨</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="header-eyebrow">📊 Portfolio Project · Kaggle Dataset Analysis</div>
+    <h1>Hotel Operations KPI Dashboard</h1>
+    <div class="header-sub">Bookings · Revenue · Cancellations · Market Segments · 2015–2017</div>
+  </div>
+  <div class="header-right">
+    <div class="header-badge">kaggle.com — jessemostipak/hotel-booking-demand</div>
+    <div class="author">Samuel Then · Data Analyst · SQL · Tableau · Power BI</div>
+  </div>
+</div>
+
+<div class="filter-bar">
+  <span class="filter-label">Filter by Hotel:</span>
+  <button class="pill active" data-filter="all" onclick="applyFilter('all')">All Hotels</button>
+  <button class="pill" data-filter="City Hotel" onclick="applyFilter('City Hotel')">🏙️ City Hotel</button>
+  <button class="pill" data-filter="Resort Hotel" onclick="applyFilter('Resort Hotel')">🏖️ Resort Hotel</button>
+</div>
+
+<div class="canvas">
+
+  <!-- KPIs -->
+  <div class="kpi-row">
+    <div class="kpi">
+      <div class="kpi-label">Total Bookings</div>
+      <div class="kpi-val" id="kpi-bookings">—</div>
+      <div class="kpi-sub">All reservations</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Total Revenue</div>
+      <div class="kpi-val" id="kpi-revenue">—</div>
+      <div class="kpi-sub">Confirmed stays only</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Cancellation Rate</div>
+      <div class="kpi-val" id="kpi-cancel">—</div>
+      <div class="kpi-sub">% of total bookings</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Avg Daily Rate</div>
+      <div class="kpi-val" id="kpi-adr">—</div>
+      <div class="kpi-sub">Per occupied room</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Avg Length of Stay</div>
+      <div class="kpi-val" id="kpi-nights">—</div>
+      <div class="kpi-sub">Nights per booking</div>
+    </div>
+  </div>
+
+  <!-- Row 1: Revenue trend + Market segment -->
+  <div class="row-2">
+    <div class="card">
+      <div class="card-title">
+        Monthly Revenue Trend
+        <span class="card-tag" id="trendTag">All Hotels</span>
+      </div>
+      <div class="hotel-legend">
+        <div class="hl-item"><div class="hl-dot" style="background:#3b82f6"></div>City Hotel</div>
+        <div class="hl-item"><div class="hl-dot" style="background:#06b6d4"></div>Resort Hotel</div>
+      </div>
+      <div class="line-wrap">
+        <svg id="revenueSvg" viewBox="0 0 400 140" preserveAspectRatio="none"></svg>
+      </div>
+      <div class="insight">
+        <div class="insight-label">Key Insight</div>
+        <div class="insight-text" id="trendInsight">—</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Revenue by Market Segment</div>
+      <div class="hbar-list" id="segmentBars"></div>
+      <div class="insight">
+        <div class="insight-label">Key Insight</div>
+        <div class="insight-text" id="segmentInsight">—</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 2: Cancellation by lead time + Country + Booking status donut -->
+  <div class="row-2b">
+    <div class="card">
+      <div class="card-title">
+        Cancellation Rate by Lead Time
+        <span class="card-tag">Booking Window Analysis</span>
+      </div>
+      <div class="hbar-list" id="leadBars"></div>
+      <div class="insight">
+        <div class="insight-label">Key Insight</div>
+        <div class="insight-text" id="leadInsight">—</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Top 8 Countries by Bookings <span class="card-tag" id="countryTag">All Hotels</span></div>
+      <div class="hbar-list" id="countryBars"></div>
+    </div>
+  </div>
+
+  <!-- Row 3: Booking status donut + ADR comparison + Customer type -->
+  <div class="row-3">
+    <div class="card">
+      <div class="card-title">Booking Status Breakdown</div>
+      <div class="donut-wrap">
+        <div class="donut-svg-wrap">
+          <svg id="donutSvg" viewBox="0 0 150 150" width="150" height="150"></svg>
+          <div class="donut-center">
+            <div class="donut-center-val" id="donutTotal">—</div>
+            <div class="donut-center-lbl">Total</div>
+          </div>
+        </div>
+        <div class="donut-legend" id="donutLegend"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">ADR by Month — City vs Resort</div>
+      <div class="hotel-legend">
+        <div class="hl-item"><div class="hl-dot" style="background:#3b82f6"></div>City Hotel</div>
+        <div class="hl-item"><div class="hl-dot" style="background:#06b6d4"></div>Resort Hotel</div>
+      </div>
+      <div class="line-wrap" style="height:130px;">
+        <svg id="adrSvg" viewBox="0 0 340 120" preserveAspectRatio="none"></svg>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Bookings by Customer Type <span class="card-tag" id="custTag">All Hotels</span></div>
+      <div class="prog-list" id="custBars"></div>
+      <div class="insight" style="margin-top:12px;">
+        <div class="insight-label">Key Insight</div>
+        <div class="insight-text" id="custInsight">—</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <div>Samuel Then · Data Analyst · Portfolio Project</div>
+  <div class="footer-tools">
+    <span class="tool-chip">SQL</span>
+    <span class="tool-chip">Tableau</span>
+    <span class="tool-chip">Power BI</span>
+    <span class="tool-chip">Advanced Excel</span>
+    <span class="tool-chip">DAX</span>
+  </div>
+  <div>Data: Kaggle · jessemostipak/hotel-booking-demand · 119,390 rows</div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
