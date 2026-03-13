@@ -1,41 +1,13 @@
-# hotel-kpi-dashboard
-
 Analysis of hotel booking demand using a real Kaggle dataset — 119,390 reservations across two hotel types (City Hotel and Resort Hotel) covering 2015–2017. Built this one to show hospitality analytics in a professional context, since a lot of my background is in that space.
 
----
-
-## what's in here
-
-```
-hotel-kpi-dashboard/
-│
-├── sql/
-│   └── queries.sql       # cleaning, KPI aggregations, Tableau-ready exports
-│
-├── data/
-│   └── hotel_kpi_summary.csv   # clean aggregated output from SQL
-│
-├── index.html            # interactive KPI dashboard
-├── style.css             # dashboard styles
-├── main.js               # dashboard logic and chart rendering
-│
-└── README.md
-```
-
----
-
-## the data
+# The data
 
 Kaggle dataset by Jesse Mostipak — link here:
-https://www.kaggle.com/datasets/jessemostipak/hotel-booking-demand
+(https://www.kaggle.com/datasets/jessemostipak/hotel-booking-demand)
 
-119,390 rows × 32 columns. Covers two properties — a city hotel and a resort hotel in Portugal. Key fields include ADR (average daily rate), lead time, market segment, country of origin, deposit type, customer type, and cancellation status.
+119,390 rows × 32 columns. Covers two properties and a city hotel and a resort hotel in Portugal. Key fields include ADR (average daily rate), lead time, market segment, country of origin, deposit type, customer type, and cancellation status.
 
 Raw CSV is not pushed to this repo. Download directly from Kaggle to run the queries yourself.
-
----
-
-## what I looked at
 
 - total revenue, ADR, cancellation rate and average length of stay by hotel type
 - monthly revenue trends — city hotel vs resort hotel
@@ -45,9 +17,7 @@ Raw CSV is not pushed to this repo. Download directly from Kaggle to run the que
 - booking status breakdown — confirmed vs canceled
 - customer type analysis and which segments are most reliable
 
----
-
-## cleaning notes
+# Data Cleaning
 
 Main things handled in SQL before analysis:
 
@@ -61,21 +31,15 @@ Main things handled in SQL before analysis:
 
 All cleaning steps are documented in sql/queries.sql.
 
----
-
-## tools used
+# Tools used
 
 SQL, Tableau, Advanced Excel, Power BI, DAX
 
 Tableau dashboard coming soon — will link here once published to Tableau Public.
 
----
-
-## dashboard
+# Dashboard
 
 Open index.html in any browser. Use the filter buttons at the top to switch between All Hotels, City Hotel, and Resort Hotel — every chart updates.
-
----
 
 built by Samuel Then
 linkedin.com/in/samuel-then
