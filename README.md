@@ -1,4 +1,4 @@
-Analysis of hotel booking demand using a real Kaggle dataset — 119,390 reservations across two hotel types (City Hotel and Resort Hotel) covering 2015–2017. Built this one to show hospitality analytics in a professional context, since a lot of my background is in that space.
+Analysis of hotel booking demand using a real Kaggle dataset of 119,390 reservations across two hotel types (City Hotel and Resort Hotel) covering 2015–2017. Built this one to show hospitality analytics in a professional context, since a lot of my background is in that space.
 
 # The data
 
