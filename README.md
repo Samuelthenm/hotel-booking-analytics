@@ -1,45 +1,30 @@
-Analysis of hotel booking demand using a real Kaggle dataset of 119,390 reservations across two hotel types (City Hotel and Resort Hotel) covering 2015–2017. Built this one to show hospitality analytics in a professional context, since a lot of my background is in that space.
+# Hotel Operations KPI Dashboard
 
-# The data
+Hospitality analytics project using a real Kaggle dataset — 119,390 hotel reservations across a City Hotel and Resort Hotel in Portugal (2015–2017). Built this because a lot of my background is in that space and I wanted something that reflects that.
 
-Kaggle dataset by Jesse Mostipak — link here:
-(https://www.kaggle.com/datasets/jessemostipak/hotel-booking-demand)
+**Live** [samuelthenm.github.io/hotel-booking-analytics](https://samuelthenm.github.io/hotel-booking-analytics)
 
-119,390 rows × 32 columns. Covers two properties and a city hotel and a resort hotel in Portugal. Key fields include ADR (average daily rate), lead time, market segment, country of origin, deposit type, customer type, and cancellation status.
 
-Raw CSV is not pushed to this repo. Download directly from Kaggle to run the queries yourself.
+# Data
 
-- total revenue, ADR, cancellation rate and average length of stay by hotel type
-- monthly revenue trends — city hotel vs resort hotel
-- which market segments drive the most revenue (and which cancel the most)
-- how cancellation rate increases with booking lead time
-- top countries by booking volume
-- booking status breakdown — confirmed vs canceled
-- customer type analysis and which segments are most reliable
+Source: [jessemostipak/hotel-booking-demand](https://www.kaggle.com/datasets/jessemostipak/hotel-booking-demand) — 119,390 rows × 32 columns.
+ 
+Both files are in `data/` — the raw CSV as downloaded from Kaggle and the cleaned version after running the queries in `sql/queries.sql`.
 
-# Data Cleaning
+** What I explored **
 
-Main things handled in SQL before analysis:
+Revenue and ADR by hotel type, monthly trends, market segment performance, cancellation rate by lead time, top booking countries, and customer type reliability.
 
-- replaced NULL children values with 0
-- filled missing country codes with 'Unknown'
-- removed rows where ADR was zero or negative (data entry errors)
-- dropped extreme ADR outliers above $5,000
-- calculated total_nights as weekend nights + weekday nights combined
-- added a revenue column (ADR × total nights) for confirmed stays only
-- standardized month names to numeric values for proper sort order in charts
+# Cleaning (SQL)
 
-All cleaning steps are documented in sql/queries.sql.
+Nulls filled, bad ADR values removed, added `total_nights` and `revenue` columns, fixed month sort order. All in `sql/queries.sql`.
 
-# Tools used
+# Stack
 
-SQL, Tableau, Advanced Excel, Power BI, DAX
+SQL · Power BI · DAX · Advanced Excel
 
-Tableau dashboard coming soon — will link here once published to Tableau Public.
+## PowerBi Preview
 
-# Dashboard
+![Power BI Dashboard](assets/powerbi-preview.gif)
 
-Open index.html in any browser. Use the filter buttons at the top to switch between All Hotels, City Hotel, and Resort Hotel — every chart updates.
-
-built by Samuel Then
-linkedin.com/in/samuel-then
+[Samuel Then](https://linkedin.com/in/samuel-then) · Data Analyst
