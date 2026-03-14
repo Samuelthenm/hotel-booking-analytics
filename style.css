@@ -57,7 +57,9 @@ body {
 
 .header-sub { font-size: 0.75rem; color: var(--text-muted); margin-top: 3px; }
 
-.header-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.header-right { position: relative;
+    z-index: 1;
+    text-align: right;}
 
 .header-badge {
   padding: 4px 12px;
